@@ -1,14 +1,16 @@
 //this is the main root file to start
 import React from "react";
-import CartItem from "./CartItem";
+import Cart from "./Cart";
 
 function App() {
 	return (
 		<div className="App">
 			<>
-				<h1>Cart</h1>
+				{/* <h1>Cart</h1> */}
+				{/* here we render Cart */}
+				<Cart/>
 				{/* here we render CartItems */}
-				<CartItem />
+				{/* <CartItem /> */}
 			</>
 		</div>
 	);
