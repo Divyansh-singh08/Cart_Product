@@ -4,18 +4,64 @@ import React from "react";
 //class base component
 //function base component
 class CartItem extends React.Component {
+    //adding state to your components
+    //state is a way to store the local data for that particular components
+    //state is a plane js object 
+    constructor () {
+        super();//this is bcz we inherit form parent class so we need to call the constructor of the parent class 
+        this.state = {
+            price:999,
+            title: 'Phone',
+            qty: 1,
+            img: '',
+        };//grab the data from constructor and use in jsx
+        //binding for the  this so that u can use it by other object to
+        this.increaseQty = this.increaseQty.bind(this);
+        //if there is lot then we can user arrow function and arrow
+        //arrow function will bind automatically to it
+
+    }
+    //event listener in react 
+    increaseQty(){
+        console.log('this.state',this.state);
+    }
+
 	// this method will return jsx
 	render() {
+        //use object destructuring js
+        const { price,title,qty,} = this.state;
+
 		return (
 			<div className="cart-item">
 				<div className="left-block">
 					<img style={styles.images} alt="" />
 				</div>
 				<div className="right-block">
-					<div style={{ fontSize: 25,color:'red'}} > Phone </div>
-					<div style={{ fontWeight:'bold', color:'black'}} > Rs 999 </div>
-					<div style={{ color:'green'}} > Qty: 1 </div>
-					<div className=".cart-item-actions">{/* Buttons */}</div>
+					<div style={{ fontSize: 25, color: "red" }}> {title} </div>
+					<div style={{ fontWeight: "bold", color: "black" }}> Rs {price} </div>
+					<div style={{ color: "green" }}> Qty: {qty} </div>
+					<div className=".cart-item-actions">
+						{/* Buttons */}
+						<img
+							alt="increase"
+							className="action-icons"
+							src="fa-solid fa-circle-plus"
+                            //sending the reference of the increaseQty
+                            // onClick={this.increaseQty.bind(this)}
+                            onClick={this.increaseQty}
+
+						/>
+						<img
+							alt="decrease"
+							className="action-icons"
+							src="https://icons8.com/icon/WNfr28fGMSmv/minus"
+						/>
+						<img
+							alt="delete"
+							className="action-icons"
+							src="https://www.flaticon.com/free-icon/bin_9789276?term=delete&page=1&position=45&origin=search&related_id=9789276"
+						/>
+					</div>
 				</div>
 			</div>
 		);
@@ -28,8 +74,8 @@ const styles = {
 	images: {
 		height: 120,
 		width: 120,
-	    borderRadius: 30,
-        backgroundColor:' #531ba1',
+		borderRadius: 30,
+		backgroundColor: " #531ba1",
 	},
 };
 
