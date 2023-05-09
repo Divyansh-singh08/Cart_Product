@@ -19,26 +19,79 @@ class CartItem extends React.Component {
 		this.increaseQty = this.increaseQty.bind(this);
 		//if there is lot then we can user arrow function and arrow
 		//arrow function will bind automatically to it
+		this.decreaseQty = this.decreaseQty.bind(this);
+
+        this.testing();
 	}
 	//event listener in react
 	increaseQty() {
-		
 		console.log("this.state", this.state);
-        // this.state.qty += 1; //now updating bcz react don't know
+		// this.state.qty += 1; //now updating bcz react don't know
 		//so for that react give setState function which is coming from react component
 
 		//setState method-1 object form
 		// this.setState({
 		// 	qty: this.state.qty + 1,//doing shallow merge
-		// });
+		// },
+		//this will execute when our state will be finished
+		// ()=>{});
 
 		//setState method-2 function form
-		this.setState((prevState) => {
-			return {
-				qty: prevState.qty + 1,
-			};
+		this.setState(
+			(prevState) => {
+				return {
+					qty: prevState.qty + 1,
+				};
+			},
+			//this will execute when our state will be finished
+            /*### ->>> NOTE: TODO:
+                The callback function is invoked when setState is 
+                finished and the component gets rendered. 
+                Since setState() is asynchronous the callback
+                function is used for any post action.
+            */
+			() => {
+				console.log("this.state", this.state);
+			}
+		);
+	}
+
+	//setState perform different in except react event
+	testing() {
+		const promise = new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve("done");
+			}, 5000);
 		});
-        
+		promise.then(() => {
+			//setState act like a synchronous call
+			// this.setState({ qty: 100 });
+			this.setState({ qty: this.state.qty + 10 });
+			this.setState({ qty: this.state.qty + 10 });
+			this.setState({ qty: this.state.qty + 10 });
+
+			console.log("state", this.state);
+		});
+	}
+
+	decreaseQty() {
+		// console.log("this-state", this.state);
+		const { qty } = this.state;
+
+		if (qty === 0) {
+			return;
+		}
+
+		this.setState(
+			(prevState) => {
+				return {
+					qty: prevState.qty - 1,
+				};
+			},
+			() => {
+				console.log("this.state", this.state);
+			}
+		);
 	}
 
 	// this method will return jsx
@@ -69,6 +122,7 @@ class CartItem extends React.Component {
 							alt="decrease"
 							className="action-icons"
 							src="https://icons8.com/icon/WNfr28fGMSmv/minus"
+							onClick={this.decreaseQty}
 						/>
 						<img
 							alt="delete"
@@ -94,3 +148,8 @@ const styles = {
 };
 
 export default CartItem;
+
+
+//some question related to it
+// What happens when you call setState() inside render() method?
+// answer -->>> Call to setState() invokes render().It gets into an infinite loop.
