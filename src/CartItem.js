@@ -7,22 +7,22 @@ class CartItem extends React.Component {
 	//adding state to your components
 	//state is a way to store the local data for that particular components
 	//state is a plane js object
-	constructor() {
-		super(); //this is bcz we inherit form parent class so we need to call the constructor of the parent class
-		this.state = {
-			price: 999,
-			title: "Phone",
-			qty: 1,
-			img: "",
-		}; //grab the data from constructor and use in jsx
-		//binding for the  this so that u can use it by other object to
-		this.increaseQty = this.increaseQty.bind(this);
-		//if there is lot then we can user arrow function and arrow
-		//arrow function will bind automatically to it
-		this.decreaseQty = this.decreaseQty.bind(this);
+	// constructor() {
+	// 	super(); //this is bcz we inherit form parent class so we need to call the constructor of the parent class
+	// 	this.state = {
+	// 		price: 999,
+	// 		title: "Phone",
+	// 		qty: 1,
+	// 		img: "",
+	// 	}; //grab the data from constructor and use in jsx
+	// 	//binding for the  this so that u can use it by other object to
+	// 	this.increaseQty = this.increaseQty.bind(this);
+	// 	//if there is lot then we can user arrow function and arrow
+	// 	//arrow function will bind automatically to it
+	// 	this.decreaseQty = this.decreaseQty.bind(this);
 
-        this.testing();
-	}
+	//     this.testing();
+	// }
 	//event listener in react
 	increaseQty() {
 		console.log("this.state", this.state);
@@ -44,7 +44,7 @@ class CartItem extends React.Component {
 				};
 			},
 			//this will execute when our state will be finished
-            /*### ->>> NOTE: TODO:
+			/*### ->>> NOTE: TODO:
                 The callback function is invoked when setState is 
                 finished and the component gets rendered. 
                 Since setState() is asynchronous the callback
@@ -96,8 +96,15 @@ class CartItem extends React.Component {
 
 	// this method will return jsx
 	render() {
+		//here we grab the Props
+		// and show from here
+		console.log("this.props", this.props);
+
 		//use object destructuring js
-		const { price, title, qty } = this.state;
+		// const { price, title, qty } = this.state;
+		//so we can use props
+		// const { price, title, qty } = this.props;
+		const { price, title, qty } = this.props.product;
 
 		return (
 			<div className="cart-item">
@@ -148,7 +155,6 @@ const styles = {
 };
 
 export default CartItem;
-
 
 //some question related to it
 // What happens when you call setState() inside render() method?
