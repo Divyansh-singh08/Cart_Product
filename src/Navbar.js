@@ -2,24 +2,25 @@ import React from "react";
 
 //CartItem inherit the functionality form the ReactComponent
 //class base component
-//function base component
-class Navbar extends React.Component {
-	render() {
-		return (
-			<div style={styles.nav}>
-				{/* structure of navbar  */}
-				<div style={styles.cartIconContainer}>
-					<img
-						style={styles.cartIcon}
-						src="https://img.icons8.com/?size=1x&id=13014&format=png"
-						alt="cart-icon"
-					/>
-					<span style={styles.cartCount}>3</span>
-				</div>
+// class Navbar extends React.Component {
+// 	render() {
+
+//this does not have {state} so we convert into them in functional base components
+const Navbar = (props) => {
+	return (
+		<div style={styles.nav}>
+			{/* structure of navbar  */}
+			<div style={styles.cartIconContainer}>
+				<img
+					style={styles.cartIcon}
+					src="https://img.icons8.com/?size=1x&id=13014&format=png"
+					alt="cart-icon"
+				/>
+				<span style={styles.cartCount}> {props.counts} </span>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 // we can't css(style) like simple in jsx so we use
 //object to style
@@ -45,7 +46,7 @@ const styles = {
 		position: "absolute",
 		right: 15,
 		top: -1,
-        color:'red',
+		color: "red",
 	},
 };
 

@@ -50,3 +50,18 @@ body {
   /* justify-content:left; */
   flex-direction: column;
 }
+
+.app-totals {
+  /* font-size:600; */
+  color:rgb(187, 138, 82);
+  margin-left:105px;
+  font-size:30px;
+  font-weight: 700;
+  padding:4px;
+  border:2px solid rgb(116, 112, 112);
+  display:inline-block;
+  background-color:teal;
+  border-radius: 5px;
+
+
+}
