@@ -2,6 +2,7 @@
 import React from "react";
 import Cart from "./Cart";
 
+//this is the functional components
 function App() {
 	return (
 		<div className="App">

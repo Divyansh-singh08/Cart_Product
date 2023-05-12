@@ -24,75 +24,75 @@ class CartItem extends React.Component {
 	//     this.testing();
 	// }
 	//event listener in react
-	increaseQty() {
-		console.log("this.state", this.state);
-		// this.state.qty += 1; //now updating bcz react don't know
-		//so for that react give setState function which is coming from react component
+	// increaseQty() {
+	// 	console.log("this.state", this.state);
+	// 	// this.state.qty += 1; //now updating bcz react don't know
+	// 	//so for that react give setState function which is coming from react component
 
-		//setState method-1 object form
-		// this.setState({
-		// 	qty: this.state.qty + 1,//doing shallow merge
-		// },
-		//this will execute when our state will be finished
-		// ()=>{});
+	// 	//setState method-1 object form
+	// 	// this.setState({
+	// 	// 	qty: this.state.qty + 1,//doing shallow merge
+	// 	// },
+	// 	//this will execute when our state will be finished
+	// 	// ()=>{});
 
-		//setState method-2 function form
-		this.setState(
-			(prevState) => {
-				return {
-					qty: prevState.qty + 1,
-				};
-			},
-			//this will execute when our state will be finished
-			/*### ->>> NOTE: TODO:
-                The callback function is invoked when setState is 
-                finished and the component gets rendered. 
-                Since setState() is asynchronous the callback
-                function is used for any post action.
-            */
-			() => {
-				console.log("this.state", this.state);
-			}
-		);
-	}
+	// 	//setState method-2 function form
+	// 	this.setState(
+	// 		(prevState) => {
+	// 			return {
+	// 				qty: prevState.qty + 1,
+	// 			};
+	// 		},
+	// 		//this will execute when our state will be finished
+	// 		/*### ->>> NOTE: TODO:
+    //             The callback function is invoked when setState is 
+    //             finished and the component gets rendered. 
+    //             Since setState() is asynchronous the callback
+    //             function is used for any post action.
+    //         */
+	// 		() => {
+	// 			console.log("this.state", this.state);
+	// 		}
+	// 	);
+	// }
 
-	//setState perform different in except react event
-	testing() {
-		const promise = new Promise((resolve, reject) => {
-			setTimeout(() => {
-				resolve("done");
-			}, 5000);
-		});
-		promise.then(() => {
-			//setState act like a synchronous call
-			// this.setState({ qty: 100 });
-			this.setState({ qty: this.state.qty + 10 });
-			this.setState({ qty: this.state.qty + 10 });
-			this.setState({ qty: this.state.qty + 10 });
+	// //setState perform different in except react event
+	// testing() {
+	// 	const promise = new Promise((resolve, reject) => {
+	// 		setTimeout(() => {
+	// 			resolve("done");
+	// 		}, 5000);
+	// 	});
+	// 	promise.then(() => {
+	// 		//setState act like a synchronous call
+	// 		// this.setState({ qty: 100 });
+	// 		this.setState({ qty: this.state.qty + 10 });
+	// 		this.setState({ qty: this.state.qty + 10 });
+	// 		this.setState({ qty: this.state.qty + 10 });
 
-			console.log("state", this.state);
-		});
-	}
+	// 		console.log("state", this.state);
+	// 	});
+	// }
 
-	decreaseQty() {
-		// console.log("this-state", this.state);
-		const { qty } = this.state;
+	// decreaseQty() {
+	// 	// console.log("this-state", this.state);
+	// 	const { qty } = this.state;
 
-		if (qty === 0) {
-			return;
-		}
+	// 	if (qty === 0) {
+	// 		return;
+	// 	}
 
-		this.setState(
-			(prevState) => {
-				return {
-					qty: prevState.qty - 1,
-				};
-			},
-			() => {
-				console.log("this.state", this.state);
-			}
-		);
-	}
+	// 	this.setState(
+	// 		(prevState) => {
+	// 			return {
+	// 				qty: prevState.qty - 1,
+	// 			};
+	// 		},
+	// 		() => {
+	// 			console.log("this.state", this.state);
+	// 		}
+	// 	);
+	// }
 
 	// this method will return jsx
 	render() {
@@ -104,8 +104,11 @@ class CartItem extends React.Component {
 		// const { price, title, qty } = this.state;
 		//so we can use props
 		// const { price, title, qty } = this.props;
-		const { price, title, qty } = this.props.product;
+		const { price, title, qty } = this.props.products;
+		// console.log(price, title, qty);
 
+		//to make a clean code now we use
+		const { products ,onIncreaseQuantity,onDecreaseQuantity,onDeleteProduct } = this.props;
 		return (
 			<div className="cart-item">
 				<div className="left-block">
@@ -123,18 +126,25 @@ class CartItem extends React.Component {
 							src="fa-solid fa-circle-plus"
 							//sending the reference of the increaseQty
 							// onClick={this.increaseQty.bind(this)}
-							onClick={this.increaseQty}
+							// onClick={this.increaseQty}
+							//now just call the function instead of reference
+							// onClick={ ()=>{this.props.onIncreaseQuantity(this.props.products)} }
+							//clean code
+							onClick={ () => {onIncreaseQuantity(products)} }
+
 						/>
 						<img
 							alt="decrease"
 							className="action-icons"
 							src="https://icons8.com/icon/WNfr28fGMSmv/minus"
-							onClick={this.decreaseQty}
+							onClick={ () => {onDecreaseQuantity(products)} }
 						/>
+						{console.log("this is console",this.props.products)}
 						<img
 							alt="delete"
 							className="action-icons"
 							src="https://www.flaticon.com/free-icon/bin_9789276?term=delete&page=1&position=45&origin=search&related_id=9789276"
+							onClick={ () => {onDeleteProduct(products.id)} }
 						/>
 					</div>
 				</div>
@@ -150,7 +160,7 @@ const styles = {
 		height: 120,
 		width: 120,
 		borderRadius: 30,
-		backgroundColor: " #531ba1",
+		backgroundColor: "tomato",
 	},
 };
 
