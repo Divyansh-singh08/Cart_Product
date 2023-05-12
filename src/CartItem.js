@@ -45,11 +45,11 @@ class CartItem extends React.Component {
 	// 		},
 	// 		//this will execute when our state will be finished
 	// 		/*### ->>> NOTE: TODO:
-    //             The callback function is invoked when setState is 
-    //             finished and the component gets rendered. 
-    //             Since setState() is asynchronous the callback
-    //             function is used for any post action.
-    //         */
+	//             The callback function is invoked when setState is
+	//             finished and the component gets rendered.
+	//             Since setState() is asynchronous the callback
+	//             function is used for any post action.
+	//         */
 	// 		() => {
 	// 			console.log("this.state", this.state);
 	// 		}
@@ -108,7 +108,12 @@ class CartItem extends React.Component {
 		// console.log(price, title, qty);
 
 		//to make a clean code now we use
-		const { products ,onIncreaseQuantity,onDecreaseQuantity,onDeleteProduct } = this.props;
+		const {
+			products,
+			onIncreaseQuantity,
+			onDecreaseQuantity,
+			onDeleteProduct,
+		} = this.props;
 		return (
 			<div className="cart-item">
 				<div className="left-block">
@@ -123,28 +128,33 @@ class CartItem extends React.Component {
 						<img
 							alt="increase"
 							className="action-icons"
-							src="fa-solid fa-circle-plus"
+							src="https://img.icons8.com/?size=512&id=59864&format=png"
 							//sending the reference of the increaseQty
 							// onClick={this.increaseQty.bind(this)}
 							// onClick={this.increaseQty}
 							//now just call the function instead of reference
 							// onClick={ ()=>{this.props.onIncreaseQuantity(this.props.products)} }
 							//clean code
-							onClick={ () => {onIncreaseQuantity(products)} }
-
+							onClick={() => {
+								onIncreaseQuantity(products);
+							}}
 						/>
 						<img
 							alt="decrease"
 							className="action-icons"
-							src="https://icons8.com/icon/WNfr28fGMSmv/minus"
-							onClick={ () => {onDecreaseQuantity(products)} }
+							src="https://img.icons8.com/?size=512&id=59837&format=png"
+							onClick={() => {
+								onDecreaseQuantity(products);
+							}}
 						/>
-						{console.log("this is console",this.props.products)}
+						{console.log("this is console", this.props.products)}
 						<img
 							alt="delete"
 							className="action-icons"
-							src="https://www.flaticon.com/free-icon/bin_9789276?term=delete&page=1&position=45&origin=search&related_id=9789276"
-							onClick={ () => {onDeleteProduct(products.id)} }
+							src="https://img.icons8.com/?size=512&id=102350&format=png"
+							onClick={() => {
+								onDeleteProduct(products.id);
+							}}
 						/>
 					</div>
 				</div>
